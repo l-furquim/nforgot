@@ -8,14 +8,60 @@ datasource db {
 }
 
 model Author {
-  id          String   @id @default(uuid())
+  id          String     @id @default(uuid())
   alias       String
   email       String
   password    String
-  createdAt   DateTime @default(now())
+  createdAt   DateTime   @default(now())
   accountType String
   status      String
   imageUrl    String
+  notes       Note[]
+  reactions   Reaction[]
+  shares      Share[]
 
   @@map("authors")
+}
+
+model Note {
+  id        String   @id @default(uuid())
+  title     String
+  content   String
+  createdAt DateTime @default(now()) @map("created_at")
+  type      String
+
+  author    Author @relation(fields: [author_id], references: [id])
+  author_id String
+
+  reactions Reaction[]
+  Share     Share[]
+
+  @@map("notes")
+}
+
+model Reaction {
+  id        Int      @id @default(autoincrement())
+  type      String
+  reactedAt DateTime @default(now()) @map("reacted_at")
+
+  author    Author @relation(fields: [author_id], references: [id])
+  author_id String
+
+  note    Note   @relation(fields: [note_id], references: [id])
+  note_id String
+
+  @@map("reactions")
+}
+
+model Share {
+  id       Int      @id @default(autoincrement())
+  sharedAt DateTime @default(now()) @map("shared_at")
+
+  author    Author @relation(fields: [author_id], references: [id])
+  author_id String
+
+  note    Note   @relation(fields: [note_id], references: [id])
+  note_id String
+
+  @@map("shares")
 }
