@@ -5,7 +5,7 @@ import type { AuthorsRepository } from "./author-repository";
 
 export class PrismaAuthorRepository implements AuthorsRepository{
   async create(data: Prisma.AuthorCreateInput){
-    const author = await prisma.user.create({
+    const author = await prisma.author.create({
       data
     });
 
@@ -13,11 +13,12 @@ export class PrismaAuthorRepository implements AuthorsRepository{
   }
 
   async findByEmail(email: string): Promise<Author | null>{
-    const author = await prisma.user.findUnique({
-        data: {
-          email
-        },
+    const author = await prisma.author.findUnique({
+        where: {
+          email,
+         }
     });
     return author;
   }
+  
 }

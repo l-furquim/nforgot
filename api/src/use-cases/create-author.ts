@@ -30,7 +30,7 @@ export class CreateAuthorUseCase{
   
     const hashedPassword = await hash(password, 6);
   
-    await this.repository.create({
+    const author = await this.repository.create({
       email,
       password: hashedPassword,
       alias,
@@ -38,5 +38,7 @@ export class CreateAuthorUseCase{
       imageUrl,
       status: "pending"
     });
+    return author;
   }
+
 }

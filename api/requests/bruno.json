@@ -1,0 +1,9 @@
+{
+  "version": "1",
+  "name": "nforgot routes",
+  "type": "collection",
+  "ignore": [
+    "node_modules",
+    ".git"
+  ]
+}
