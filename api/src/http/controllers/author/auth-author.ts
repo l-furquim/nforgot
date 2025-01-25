@@ -19,9 +19,17 @@ export async function authAuthor(request: FastifyRequest, reply: FastifyReply){
       password
     });
 
+    const token = await reply.jwtSign({
+
+    }, {
+      sign: {
+        sub: author.id,
+      }
+    })
+
     return reply.status(200).send(
       {
-        author
+        token
       }
     )
   }catch(err){
