@@ -1,5 +1,5 @@
 export class AccountNotFoundEror extends Error{
-  constructor(){
-    super("There is no account related with this credentials");
+  constructor(credentials: string[]){
+    super("There is no account related with this credentials " + credentials.toString());
   }
 }

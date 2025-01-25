@@ -1,0 +1,18 @@
+meta {
+  name: create note
+  type: http
+  seq: 4
+}
+
+post {
+  url: http://localhost:3333/notes/create
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "title":"oie",
+    "content": "qoiejwqioeqwjeioqwj",
+  }
+}
