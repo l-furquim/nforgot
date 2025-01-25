@@ -1,13 +1,23 @@
-import type { Prisma } from "@prisma/client";
+import type { Author, Prisma } from "@prisma/client";
 import { prisma } from "@/lib/prisma";
+import type { AuthorsRepository } from "./author-repository";
 
 
-export class PrismaAuthorRepository {
+export class PrismaAuthorRepository implements AuthorsRepository{
   async create(data: Prisma.AuthorCreateInput){
     const author = await prisma.user.create({
       data
     });
 
+    return author;
+  }
+
+  async findByEmail(email: string): Promise<Author | null>{
+    const author = await prisma.user.findUnique({
+        data: {
+          email
+        },
+    });
     return author;
   }
 }

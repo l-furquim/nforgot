@@ -1,6 +1,6 @@
 import type { FastifyInstance } from "fastify";
-import { createAuthor } from "./controllers/create-author";
+import { authorRoutes } from "./controllers/author/routes";
 
 export async function appRoutes(instance: FastifyInstance){
-  instance.post("authors", createAuthor);
+  instance.register(authorRoutes, { prefix: "/authors" });
 }

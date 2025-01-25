@@ -1,7 +1,9 @@
-import { PrismaAuthorRepository } from "@/repositories/prisma-author-repository";
+import type { AuthorsRepository } from "@/repositories/author-repository";
 import { hash } from "bcryptjs";
+import { AuthorAlredyExistError } from "./errors/author-alredy-exists-error";
+import { InvalidDataError } from "./errors/invalid-data-error";
 
-interface CreateUserUseCaseRequest {
+interface CreateAuthorUseCaseRequest {
   alias: string,
   email: string,
   password: string,
@@ -9,14 +11,21 @@ interface CreateUserUseCaseRequest {
   imageUrl: string,
 }
 
-export class createUserUseCase{
-  constructor(private repository: PrismaAuthorRepository){}
+export class CreateAuthorUseCase{
+  constructor(private repository: AuthorsRepository){}
 
   async create({
     alias, email, password, accountType, imageUrl
-  }: CreateUserUseCaseRequest){
+  }: CreateAuthorUseCaseRequest){
+
     if(!email.includes("@")){
-      throw new Error("Invalid email");
+      throw new InvalidDataError(email);
+    }
+
+    const userAlredyExists =  await this.repository.findByEmail(email);
+
+    if(userAlredyExists){
+      throw new AuthorAlredyExistError;
     }
   
     const hashedPassword = await hash(password, 6);
