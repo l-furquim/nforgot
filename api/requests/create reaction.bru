@@ -1,11 +1,11 @@
 meta {
-  name: create note
+  name: create reaction
   type: http
-  seq: 4
+  seq: 8
 }
 
 post {
-  url: http://localhost:3333/notes/create
+  url: http://localhost:3333/reactions/create
   body: json
   auth: bearer
 }
@@ -16,9 +16,7 @@ auth:bearer {
 
 body:json {
   {
-    "title":"Note do dia",
-    "content": "oi, hoje eu comi ovo com ovo",
-    "type": "PUBLIC",
-    "authorId": "86653ee1-7e5d-47de-9192-6a09ebf9a248"
+    "type": "LOVED",
+    "noteId": "9b6a9d12-aafa-4987-b1e1-1bcc9554f3e3"
   }
 }
