@@ -5,4 +5,5 @@ export interface NoteRepository{
   findByUserId(userId: string): Promise<Note[] | null>;
   update(data: Note): Promise<void>;
   findById(id: string): Promise<Note | null>;
+  delete(id: string): Promise<void>;
 }
