@@ -19,18 +19,21 @@ export async function authAuthor(request: FastifyRequest, reply: FastifyReply){
       password
     });
 
-    const token = await reply.jwtSign({
-
-    }, {
-      sign: {
-        sub: author.id,
+    const token = await reply.jwtSign(
+      {
+        role: "USER"
+      },
+      {
+        sign: {
+          sub: author.id,
+        }
       }
-    })
+    )
 
     return reply.status(200).send(
       {
         token
-      }
+      } 
     )
   }catch(err){
     if(err instanceof InvalidCredentialsError){
