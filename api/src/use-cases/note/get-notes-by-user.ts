@@ -1,6 +1,6 @@
 import type { PrismaAuthorRepository } from "@/repositories/prisma-author-repository";
 import type { PrismaNoteRepository } from "@/repositories/prisma-note-repository";
-import { AccountNotFoundEror } from "./errors/account-not-found-error";
+import { AccountNotFoundEror } from "../errors/account-not-found-error";
 
 interface GetNotesByUserRequest {
   userId: string,

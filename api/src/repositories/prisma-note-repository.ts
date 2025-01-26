@@ -3,6 +3,14 @@ import type { NoteRepository } from "./note-repository";
 import { prisma } from "@/lib/prisma";
 
 export class PrismaNoteRepository implements NoteRepository{
+  async findById(id: string): Promise<Note | null> {
+    const note = await prisma.note.findUnique({
+      where: {
+        id,
+      },
+    });
+    return note;
+  }
   
   async create(data: Prisma.NoteUncheckedCreateInput): Promise<Note> {
     const note = await prisma.note.create({
@@ -12,23 +20,51 @@ export class PrismaNoteRepository implements NoteRepository{
     return note;
   }
   async findByUserId(authorId: string): Promise<Note[] | null> {
-    const note = await prisma.note.findMany({
-      where: {
-        author_id: authorId
+    const notes = await prisma.note.findMany({
+      select: {
+        id: true,
+        title: true,
+        content: true,
+        createdAt: true,
+        reactions: {
+          select: {
+            type: true
+          }
+        },
+        Share: {
+          select: {
+            author: true,
+          }
+        },
+        type: true,
+        author_id: true,
+        _count:{
+          select:{
+            reactions: true,
+            Share: true,
+          }
+        }
       },
-    })
+      where: {
+        author_id: authorId,
+      }
+      
+    });
+    console.log(notes)
+    const note = await prisma.note.findMany({
+        where: {
+          author_id: authorId
+        },
+      })
 
     return note;
   }
-  async update(data: Note): Promise<Note> {
-      const note = await prisma.note.update({
+  async update(data: { title: string, content: string, type: string, id: string}): Promise<void> {
+      await prisma.note.update({
         where: {
-          id: data.id
+          id: data.id,
         },
         data,
       });
-
-      return note
-  }
-
+  };
 }

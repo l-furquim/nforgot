@@ -1,6 +1,6 @@
 import { AccountNotFoundEror } from "@/use-cases/errors/account-not-found-error";
 import { InvalidPublicNoteContent } from "@/use-cases/errors/invalid-public-note-content";
-import { makeCreateNoteUseCase } from "@/use-cases/factories/make-create-note-use-case";
+import { makeCreateNoteUseCase } from "@/use-cases/factories/note/make-create-note-use-case";
 import type { FastifyReply, FastifyRequest } from "fastify";
 import z from "zod";
 

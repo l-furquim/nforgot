@@ -1,7 +1,7 @@
 import type { AuthorsRepository } from "@/repositories/author-repository";
 import { hash } from "bcryptjs";
-import { AuthorAlredyExistError } from "./errors/author-alredy-exists-error";
-import { InvalidDataError } from "./errors/invalid-data-error";
+import { AuthorAlredyExistError } from "../errors/author-alredy-exists-error";
+import { InvalidDataError } from "../errors/invalid-data-error";
 
 interface CreateAuthorUseCaseRequest {
   alias: string,

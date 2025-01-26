@@ -1,0 +1,23 @@
+meta {
+  name: update note
+  type: http
+  seq: 6
+}
+
+put {
+  url: http://localhost:3333/notes/update
+  body: json
+  auth: bearer
+}
+
+auth:bearer {
+  token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiVVNFUiIsInN1YiI6Ijg2NjUzZWUxLTdlNWQtNDdkZS05MTkyLTZhMDllYmY5YTI0OCIsImlhdCI6MTczNzkyMDg2MSwiZXhwIjoxNzM3OTIxNDYxfQ.c6SNlMTfVqZc9ffCK2EgxGIxQBphjO1WwQ6XfQ1lIwY
+}
+
+body:json {
+  {
+    "id": "0a1c4cb3-94f0-4303-93df-1ee702b6c23b", "title": "Novo titulo daora",
+    "content": "super conteudo",
+    "type": "PRIVATE"
+  }
+}

@@ -1,7 +1,6 @@
 import { AccountNotFoundEror } from "@/use-cases/errors/account-not-found-error";
-import { makeGetNotesAuthor } from "@/use-cases/factories/make-get-notes-user";
+import { makeGetNotesAuthor } from "@/use-cases/factories/note/make-get-notes-user";
 import type { FastifyReply, FastifyRequest } from "fastify";
-import z from "zod";
 
 export async function getAuthorNotes(request: FastifyRequest, reply: FastifyReply){
   try{

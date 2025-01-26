@@ -1,7 +1,7 @@
 import type { AuthorsRepository } from "@/repositories/author-repository";
 import type { NoteRepository } from "@/repositories/note-repository";
-import { AccountNotFoundEror } from "./errors/account-not-found-error";
-import { InvalidPublicNoteContent } from "./errors/invalid-public-note-content";
+import { AccountNotFoundEror } from "../errors/account-not-found-error";
+import { InvalidPublicNoteContent } from "../errors/invalid-public-note-content";
 
 interface CreateNoteUseCaseRequest {
   title: string,

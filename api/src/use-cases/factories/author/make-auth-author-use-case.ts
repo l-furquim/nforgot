@@ -1,5 +1,5 @@
 import { PrismaAuthorRepository } from "@/repositories/prisma-author-repository"
-import { AuthAuthorUseCase } from "../auth-author";
+import { AuthAuthorUseCase } from "@/use-cases/author/auth-author";
 
 
 export function makeAuthAuthorUseCase(){

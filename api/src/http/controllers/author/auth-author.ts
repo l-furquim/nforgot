@@ -1,5 +1,5 @@
 import { InvalidCredentialsError } from "@/use-cases/errors/invalid-credentials-error";
-import { makeAuthAuthorUseCase } from "@/use-cases/factories/make-auth-author-use-case";
+import { makeAuthAuthorUseCase } from "@/use-cases/factories/author/make-auth-author-use-case";
 import type { FastifyReply, FastifyRequest } from "fastify";
 import z from "zod";
 
@@ -39,7 +39,7 @@ export async function authAuthor(request: FastifyRequest, reply: FastifyReply){
     if(err instanceof InvalidCredentialsError){
       return reply.status(400).send({
         message: err.message,
-      })
+      });
     }
   }
 }

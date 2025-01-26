@@ -1,4 +1,4 @@
-import { makeCreateAuthorUseCase } from "@/use-cases/factories/make-create-author-use-case";
+import { makeCreateAuthorUseCase } from "@/use-cases/factories/author/make-create-author-use-case";
 import type { FastifyReply, FastifyRequest } from "fastify";
 import z from "zod";
 
