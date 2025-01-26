@@ -6,6 +6,13 @@ meta {
 
 post {
   url: http://localhost:3333/authors/auth
-  body: none
+  body: json
   auth: none
+}
+
+body:json {
+  {
+    "email": "lucas@gmail.com",
+    "password": "ishos123"  
+  }
 }

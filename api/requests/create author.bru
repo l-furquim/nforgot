@@ -6,6 +6,16 @@ meta {
 
 post {
   url: http://localhost:3333/authors/create
-  body: none
+  body: json
   auth: none
+}
+
+body:json {
+  {
+    "alias": "furqas",
+    "email": "lucas@gmaill.com",
+    "accountType": "GITHUB",
+    "imageUrl": "http://github.com/l-furquim.png",
+    "password": "ishow123"
+  }
 }

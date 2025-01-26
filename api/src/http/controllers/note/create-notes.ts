@@ -17,7 +17,7 @@ export async function createNote(request: FastifyRequest, reply: FastifyReply){
   try{
     const useCase = makeCreateNoteUseCase();
 
-    const note = useCase.create({
+    const note = await useCase.create({
       title,
       content,
       type,

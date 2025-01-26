@@ -17,11 +17,13 @@ export class CreateNoteUseCase {
   async create({
     title,content,type,authorId
   }: CreateNoteUseCaseRequest){
-    const author = this.authorRepository.findById(authorId);
+    
+    const author = await this.authorRepository.findById(authorId);
 
     if(!author){
       throw new AccountNotFoundEror([authorId]);
     }
+    console.log("Achou o ator");
 
     if(type === "PUBLIC" && (content === "" || title === "")){
       throw new InvalidPublicNoteContent();
