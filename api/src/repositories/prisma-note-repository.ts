@@ -3,6 +3,7 @@ import type { NoteRepository } from "./note-repository";
 import { prisma } from "@/lib/prisma";
 
 export class PrismaNoteRepository implements NoteRepository{
+
   async delete(id: string): Promise<void> {
     await prisma.note.delete({
       where: {

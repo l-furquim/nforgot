@@ -7,4 +7,5 @@ export interface ReactionRepository {
   findByUser(id: string): Promise<Reaction[] | null>;
   delete(id: number): Promise<void>;
   update(id: number, type: string): Promise<void>;
+  findByNoteAndAuthor(noteId: string, authorId: string): Promise<Reaction | null>;
 }

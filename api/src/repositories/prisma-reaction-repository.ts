@@ -3,6 +3,18 @@ import type { ReactionRepository } from "./reaction-repository";
 import { prisma } from "@/lib/prisma";
 
 export class PrismaReactionRepository implements ReactionRepository {
+  
+  async findByNoteAndAuthor(noteId: string, authorId: string): Promise<Reaction | null> {
+    const reaction = await prisma.reaction.findFirst({
+      where: {
+        author_id: authorId,
+        note_id: noteId,
+      }
+    });
+
+    return reaction;
+  }
+
   async create(data: Prisma.ReactionUncheckedCreateInput): Promise<Reaction> {
     const reaction = await prisma.reaction.create({
       data,
