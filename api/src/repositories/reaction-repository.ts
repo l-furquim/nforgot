@@ -5,7 +5,7 @@ export interface ReactionRepository {
   findById(id: number): Promise<Reaction | null>;
   findByNote(id: string): Promise<Reaction[] | null>;
   findByUser(id: string): Promise<Reaction[] | null>;
-  delete(id: number): Promise<void>;
+  delete(data: Reaction): Promise<void>;
   update(id: number, type: string): Promise<void>;
   findByNoteAndAuthor(noteId: string, authorId: string): Promise<Reaction | null>;
 }

@@ -51,11 +51,11 @@ export class PrismaReactionRepository implements ReactionRepository {
 
     return reaction;
   };
-  async delete(id: number): Promise<void> {
+  async delete(data: Reaction): Promise<void> {
     await prisma.reaction.delete({
       where: {
-        id, 
-      },
+        id: data.id,
+      }
     });
   }
   async update(id: number, type: string): Promise<void> {

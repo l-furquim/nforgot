@@ -3,6 +3,5 @@ import { DeleteNoteUseCase } from "@/use-cases/note/delete-note";
 
 export function makeDeleteNoteUseCase(){
   const repository = new PrismaNoteRepository();
-
   return new DeleteNoteUseCase(repository);
 }

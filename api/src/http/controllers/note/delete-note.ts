@@ -15,6 +15,7 @@ export async function deleteNote(request: FastifyRequest, reply: FastifyReply){
 
     await useCase.delete({
       id,
+      authorId: request.user.sub,
     });
 
     return reply.status(204).send();
