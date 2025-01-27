@@ -20,7 +20,7 @@ app.setErrorHandler((error, request, reply) => {
   if(error instanceof ZodError){
     return reply
       .status(400)
-      .send({ message: "Invalid data", issues: error.format})
+      .send({ message: "Invalid data ", issues: error.flatten().fieldErrors})
   };
 
   if (env.NODE_ENV !== 'production') {
