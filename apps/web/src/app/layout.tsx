@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import { NavBar } from "./_components/nav-bar";
+import { NavBar } from "@/app/_components/navbar/index";
+import { Footer } from "./_components/footer";
 
 
 export const metadata: Metadata = {
@@ -25,6 +26,7 @@ export default function RootLayout({
         <div className="min-h-screen text-[#3C2A21]  dark:text-[#E5E5CB] dark:bg-[#1A120B] bg-[#E5E5CB] ">
           <NavBar/>
           {children}
+          <Footer/>
         </div>
       </body>
     </html>
