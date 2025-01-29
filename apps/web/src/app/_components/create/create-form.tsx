@@ -23,9 +23,10 @@ export type CodeFormType = z.infer<typeof CodeFormSchema>;
 
 export const CreateForm = () => {
   const [showCodeIpt, setshowCodeIpt] = useState(false);
+  const [userEmail ,setUserEmail] = useState("");
   const router = useRouter();
 
-  const { handleSubmit, register, formState: { errors } } = useForm<CreateFormType>({
+  const { handleSubmit, register, formState: { errors }, setError } = useForm<CreateFormType>({
     resolver: zodResolver(CreateFormSchema),
     defaultValues: {
       email: "",
@@ -40,28 +41,29 @@ export const CreateForm = () => {
   });
 
   const onSubmit: SubmitHandler<CreateFormType> = async ({ email }) => {
-    console.log(email);
 
     const code = await sendCodeToEmail(email);
 
-    if(code){
+    if(code.status){
       setshowCodeIpt(true);
+      setUserEmail(email);
+
+      return;
     }
-    return;
+    setError("email", {
+      message: code.message,
+    });
   };
 
   const codeSubmit: SubmitHandler<CodeFormType> = async ({ code }) => {
-    try{
-      const response = await validateCode(code);
+      const response = await validateCode(code, userEmail);
 
-      if(response){
+      if(response.status){
         router.push("/onBoarding");
-      }
+        return;
+      };
 
       codeState.setError("code", {message: "Código inválido"})
-    }catch(err){
-      codeState.setError("code", {message: "Erro ao validar codigo"})
-    }
   } 
 
   return (
