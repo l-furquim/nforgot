@@ -8,6 +8,7 @@ import { useForm, SubmitHandler } from "react-hook-form"
 import { z } from "zod"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { sendCodeToEmail } from "@/app/actions/author/send-code-email"
+import { validateCode } from "@/app/actions/author/validate-code"
 
 const CreateFormSchema = z.object({
   email: z.string().email("Por favor, insira um email válido."),
@@ -50,7 +51,17 @@ export const CreateForm = () => {
   };
 
   const codeSubmit: SubmitHandler<CodeFormType> = async ({ code }) => {
-    console.log(code);
+    try{
+      const response = await validateCode(code);
+
+      if(response){
+        router.push("/onBoarding");
+      }
+
+      codeState.setError("code", {message: "Código inválido"})
+    }catch(err){
+      codeState.setError("code", {message: "Erro ao validar codigo"})
+    }
   } 
 
   return (
