@@ -22,9 +22,10 @@ export async function validateCode(code: string, email: string): Promise<Respons
     if(token){
       const response = await api.post("authors/code/validate",data);
 
-      cookie.delete("verificationToken");
+      cookie.delete("verficationToken");
 
       cookie.set("user", email);
+      cookie.set("type", "DEFAULT");
 
       return { message: response.data, status: true };
     }
