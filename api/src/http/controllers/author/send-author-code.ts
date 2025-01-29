@@ -15,12 +15,16 @@ export async function sendAuthorCode(request: FastifyRequest, reply: FastifyRepl
   try{
     const useCase = makeSendAuthorCodeUseCase();
 
-    await useCase.send({
+    const code = await useCase.send({
       email,
     });
 
+    const token = await reply.jwtSign(
+    {code: code},
+    { expiresIn : "15min"} );
+
     return reply.status(201).send({
-      message: "Email sended",
+      token: token,
     });
   }catch(err){
     if(err instanceof MailError){

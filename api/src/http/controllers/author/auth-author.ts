@@ -1,3 +1,4 @@
+import type { AccessTokenPayload } from "@/types/fastify-jwt";
 import { InvalidCredentialsError } from "@/use-cases/errors/invalid-credentials-error";
 import { makeAuthAuthorUseCase } from "@/use-cases/factories/author/make-auth-author-use-case";
 import type { FastifyReply, FastifyRequest } from "fastify";
@@ -19,16 +20,11 @@ export async function authAuthor(request: FastifyRequest, reply: FastifyReply){
       password
     });
 
-    const token = await reply.jwtSign(
-      {
-        role: "USER"
-      },
-      {
-        sign: {
-          sub: author.id,
-        }
-      }
-    )
+    const token = await reply.jwtSign({
+      sub: author.id,
+    });
+
+    
 
     return reply.status(200).send(
       {

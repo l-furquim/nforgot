@@ -34,6 +34,8 @@ export class SendAuthorUseCase{
         subject: "Código de verificação de email",
         code,
       });
+
+      return code;
     }catch(err){
       throw new MailError(err);
     } 
