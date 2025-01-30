@@ -4,8 +4,9 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { useState, type FormEvent } from "react";
 import { IconChooser } from "./icon-chooser";
-import { newAuthor } from "@/app/actions/author/new-author";
+import { signIn } from "next-auth/react" 
 import { useRouter } from "next/navigation";
+import { getCookie } from "@/lib/cookie";
 
 export const UserForm = () => {
   const [userAvatarURL, setUserAvatarURL] = useState<string>("/profile-placeholder.png");
@@ -29,13 +30,18 @@ export const UserForm = () => {
     const password = data.get("iptPassword")?.toString();
 
     if(username && password){
-      const response = await newAuthor({
-        username,
+      const email = getCookie("user")?.replaceAll("%40", "@");
+
+      const response = await signIn("credentials", {
+        redirect: false,
+        email,
         password,
-        avatarURL: userAvatarURL,
+        alias: username,
+        accountType: "DEFAULT",
+        iconUrl: userAvatarURL,
       });
 
-      if(response.status){
+      if(response){
         router.push("/home");
       };
 
