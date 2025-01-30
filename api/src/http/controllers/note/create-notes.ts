@@ -9,10 +9,9 @@ export async function createNote(request: FastifyRequest, reply: FastifyReply){
     title: z.string(),
     content: z.string(),
     type: z.enum(["PRIVATE", "PUBLIC"]).default("PRIVATE"),
-    authorId: z.string().nonempty({message: "Invalid id for creating a note"}),
   });
 
-  const { title, content, type, authorId } = createNoteSchema.parse(request.body);
+  const { title, content, type } = createNoteSchema.parse(request.body);
 
   try{
     const useCase = makeCreateNoteUseCase();
@@ -21,7 +20,7 @@ export async function createNote(request: FastifyRequest, reply: FastifyReply){
       title,
       content,
       type,
-      authorId
+      authorId: request.user.sub,
     });
 
     return reply.status(201).send({
