@@ -1,3 +1,4 @@
+import { AuthorAlredyExistError } from "@/use-cases/errors/author-alredy-exists-error";
 import { makeCreateAuthorUseCase } from "@/use-cases/factories/author/make-create-author-use-case";
 import type { FastifyReply, FastifyRequest } from "fastify";
 import z from "zod";
@@ -15,15 +16,31 @@ export async function createAuthor(request: FastifyRequest, reply: FastifyReply)
 
   const useCase = makeCreateAuthorUseCase();
 
-  const author = await useCase.create({
-    alias,
-    email,
-    password,
-    accountType,
-    imageUrl,
-  });
+  try{
+    const author = await useCase.create({
+      alias,
+      email,
+      password,
+      accountType,
+      imageUrl,
+    });
+  
+    const token = await reply.jwtSign({
+      sub: author.id,
+    });
+  
+    return reply.status(201).send({
+      author, token,
+    })
+  }catch(err){
+    if(err instanceof AuthorAlredyExistError){
+      reply.status(400).send({
+        message: err.message,
+      });
+    };
 
-  return reply.status(201).send({
-    author,
-  })
+    reply.status(500).send({
+      err,
+    }); 
+  }
 }}
