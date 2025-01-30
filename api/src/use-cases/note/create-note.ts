@@ -7,7 +7,9 @@ interface CreateNoteUseCaseRequest {
   title: string,
   content: string,
   type: string,
-  authorId: string,  
+  authorId: string,
+  icon: string,
+  id: string,
 };
 
 
@@ -15,7 +17,7 @@ export class CreateNoteUseCase {
   constructor(private repository: NoteRepository, private authorRepository: AuthorsRepository){}
 
   async create({
-    title,content,type,authorId
+    title,content,type,authorId, icon, id
   }: CreateNoteUseCaseRequest){
     
     const author = await this.authorRepository.findById(authorId);
@@ -25,15 +27,13 @@ export class CreateNoteUseCase {
     }
     console.log("Achou o ator");
 
-    if(type === "PUBLIC" && (content === "" || title === "")){
-      throw new InvalidPublicNoteContent();
-    }
-
     const note = await this.repository.create({
       title,
       content,
       type,
-      author_id: authorId
+      icon,
+      author_id: authorId,
+      id,
     });
 
     return note;

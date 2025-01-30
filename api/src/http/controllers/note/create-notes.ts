@@ -9,10 +9,12 @@ export async function createNote(request: FastifyRequest, reply: FastifyReply){
     title: z.string(),
     content: z.string(),
     type: z.enum(["PRIVATE", "PUBLIC"]).default("PRIVATE"),
+    icon: z.string(),
+    id: z.string(),
   });
 
-  const { title, content, type } = createNoteSchema.parse(request.body);
-
+  const { title, content, type, icon, id } = createNoteSchema.parse(request.body);
+  
   try{
     const useCase = makeCreateNoteUseCase();
 
@@ -20,7 +22,9 @@ export async function createNote(request: FastifyRequest, reply: FastifyReply){
       title,
       content,
       type,
+      icon,
       authorId: request.user.sub,
+      id,
     });
 
     return reply.status(201).send({

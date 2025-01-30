@@ -9,16 +9,17 @@ export async function updateNote(request: FastifyRequest, reply: FastifyReply){
     id: z.string(),
     title: z.string(),
     content: z.string(),
+    icon: z.string(),
     type: z.enum(["PRIVATE", "PUBLIC"]),
   });
 
-  const { title, content, type, id } = updateNoteSchema.parse(request.body);
+  const { title, content, type, id, icon } = updateNoteSchema.parse(request.body);
 
   try{
     const useCase = makeUpdateNoteUseCase();
 
     await useCase.update({
-      title, content, type, id
+      title, content, type, id, icon
     });
   }catch(err){
     if(err instanceof InvalidDataError){

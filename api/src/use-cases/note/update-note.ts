@@ -6,7 +6,8 @@ interface UpdateNoteRequest {
   title: string,
   content: string,
   type: string,
-  id: string
+  icon: string,
+  id: string,
 }
 
 export class UpdateNoteUseCase{
