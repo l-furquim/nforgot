@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import { ThemeProvider } from "@/components/theme-provider";
+import Providers from "@/components/providers";
 
 export const metadata: Metadata = {
   title: "nForgot",
@@ -20,9 +22,11 @@ export default function RootLayout({
       <body
         className="antialiased"
       >
-        <div className="min-h-screen text-[#3C2A21]  dark:text-[#E5E5CB] dark:bg-[#1A120B] bg-[#E5E5CB] ">
-          {children}
-        </div>
+        <Providers>
+          <div className="min-h-screen text-[#3C2A21]  dark:text-[#E5E5CB] dark:bg-[#1A120B] bg-[#FAFAFA] ">
+            {children}
+          </div>  
+        </Providers>
       </body>
     </html>
   );

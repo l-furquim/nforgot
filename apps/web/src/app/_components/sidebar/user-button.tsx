@@ -4,6 +4,7 @@ import { SidebarMenuButton } from "@/components/ui/sidebar";
 import { ChevronDown, Settings } from "lucide-react";
 import { Avatar, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
+import { ModeToggle } from "@/components/toggle";
 
 
 export async function UserButton(){
@@ -29,7 +30,17 @@ export async function UserButton(){
               <h1 className="font-semibold text-sm">{session.alias}'s nForgot</h1>
             </div>
             <Button className="w-28 h-6 bg-[#3C2A21]">
-              <Settings/> <p className="text-xs">Configurações</p>
+              <Settings/> 
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <p className="text-xs">
+                    Configurações
+                  </p>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent>
+                  <ModeToggle/>
+                </DropdownMenuContent>
+              </DropdownMenu>
             </Button>
         </DropdownMenuItem>
       </DropdownMenuContent>

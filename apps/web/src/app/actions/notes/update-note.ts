@@ -15,6 +15,9 @@ interface UpdateNoteRequest {
 
 export async function updateNote({ title, content, id, type, icon }: UpdateNoteRequest){
   try{
+    if(content){
+      console.log(content);
+    }
     const cookie = await cookies();
 
     const token = cookie.get("nforgotAuth")?.value;
