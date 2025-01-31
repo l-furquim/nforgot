@@ -7,10 +7,10 @@ import z from "zod";
 export async function updateNote(request: FastifyRequest, reply: FastifyReply){
   const updateNoteSchema = z.object({
     id: z.string(),
-    title: z.string(),
-    content: z.string(),
-    icon: z.string(),
-    type: z.enum(["PRIVATE", "PUBLIC"]),
+    title: z.string().optional(),
+    content: z.string().optional(),
+    icon: z.string().optional(),
+    type: z.enum(["PRIVATE", "PUBLIC"]).optional(),
   });
 
   const { title, content, type, id, icon } = updateNoteSchema.parse(request.body);

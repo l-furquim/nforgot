@@ -1,4 +1,4 @@
-import type { NextAuthOptions } from "next-auth";
+import { type NextAuthOptions } from "next-auth";
 import CredentialsProvider from 'next-auth/providers/credentials';
 import { api } from "./api";
 import { cookies } from "next/headers";
@@ -11,41 +11,57 @@ export const authOptions: NextAuthOptions = {
       credentials: {
         email: { label: "Email", type: "email" },
         password: { label: "Password", type: "password" },
-        alias: { label: "Alias", "type": "alias" },
-        accountType: { label: "AccountType", type: "accountType" },
-        iconUrl: { label: "IconUrl", type: "iconUrl" },
+        alias: { label: "Alias", "type": "alias", optional: true, },
+        accountType: { label: "AccountType", type: "accountType", optional: true, },
+        imageUrl: { label: "ImageUrl", type: "imageUrl", optional: true, },
       },
       async authorize(credentials, req) {
-        const { email, password, alias, accountType, iconUrl } = credentials as {
+        const { email, password, alias, accountType, imageUrl } = credentials as {
           email: string;
           password: string;
-          alias: string,
-          accountType: string,
-          iconUrl: string,
+          alias?: string,
+          accountType?: string,
+          imageUrl?: string,
         };
 
         try{
-          console.log(iconUrl);
+          let authResponse;
 
-          const response = await api.post("/authors/create", JSON.stringify({
-            alias, email, accountType, imageUrl: iconUrl, password, 
-          }));
-  
-          const data = response.data;
-  
-          console.log(data);
-  
-          if(data.token){
-            const cookie = await cookies();
-  
-            cookie.set("nforgotAuth", data.token);
-            cookie.delete("user");
-            cookie.delete("type");
-          };
-  
-          if (data.author && data.author.id) {
-            return data.author;
+          if(alias && accountType && imageUrl){
+            const response = await api.post("/authors/create", JSON.stringify({
+              alias, email, accountType, imageUrl: imageUrl, password, 
+            }));
+    
+            const data = response.data;
+    
+            console.log(data);
+    
+            if(data.token){
+              const cookie = await cookies();
+    
+              cookie.set("nforgotAuth", data.token);
+              cookie.delete("user");
+              cookie.delete("type");
+            };
+    
+            authResponse = data.author;
+          }else{
+            const response = await api.post("/authors/auth", JSON.stringify({
+              email: email,
+              password: password,
+            }));
+
+            const data = response.data;
+
+            if(data.token){
+              const cookie = await cookies();
+    
+              cookie.set("nforgotAuth", data.token);
+            };
+
+            authResponse = data.author;
           }
+          return authResponse;
         }catch(err){
           const axiosError = err as AxiosError;
           console.log("Erro na auth " + JSON.stringify(axiosError.response?.data));
@@ -69,7 +85,7 @@ export const authOptions: NextAuthOptions = {
         token.password = user.password;
         token.alias = user.alias;
         token.accountType = user.accountType;
-        token.iconUrl = user.iconUrl;
+        token.imageUrl = user.imageUrl;
       }
       return token;
     },
@@ -80,7 +96,7 @@ export const authOptions: NextAuthOptions = {
         password: token.password as string,
         alias: token.alias as string,
         accountType: token.accountType as string,
-        iconUrl: token.iconUrl as string,
+        imageUrl: token.imageUrl as string,
       };
       return session;
     },

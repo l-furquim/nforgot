@@ -38,7 +38,7 @@ export const UserForm = () => {
         password,
         alias: username,
         accountType: "DEFAULT",
-        iconUrl: userAvatarURL,
+        imageUrl: userAvatarURL,
       });
 
       if(response){

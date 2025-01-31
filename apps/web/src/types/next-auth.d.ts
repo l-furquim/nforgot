@@ -8,7 +8,7 @@ declare module 'next-auth' {
       password: string;
       alias: string,
       accountType: string,
-      iconUrl: string,
+      imageUrl: string,
     };
   }
 
@@ -18,6 +18,6 @@ declare module 'next-auth' {
     password: string;
     alias: string,
     accountType: string,
-    iconUrl: string,
+    imageUrl: string,
   }
 }
