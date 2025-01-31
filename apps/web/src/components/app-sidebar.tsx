@@ -18,7 +18,7 @@ import { getNotes } from "@/app/actions/notes/get-notes"
 const items = [
   {
     title: "Home",
-    url: "#",
+    url: "/home",
     icon: Home,
   },
   {

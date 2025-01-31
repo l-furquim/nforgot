@@ -14,6 +14,7 @@ import { type Note } from "@/app/actions/notes/get-notes";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { createNote } from "@/app/actions/notes/create-note";
+import { DeleteNote } from "./delete-note";
 
 interface NotesContainerProps {
   fetchNotes: Note[];
@@ -77,12 +78,15 @@ export const NotesContainer: React.FC<NotesContainerProps> = ({ fetchNotes }) =>
                 <SidebarMenuItem key={note.id}>
                   <SidebarMenuButton
                     asChild
-                    className={`${note.id === currentId &&  "bg-[#3C2A21] bg-opacity-95 hover:bg-opacity-90 hover:text-[#E5E5CB] hover:bg-[#221813] text-[#E5E5CB]"}`}
+                    className={`${note.id === currentId &&  "bg-[#3C2A21]"}`}
                   >
                     <a href={`/home/${note.id}`}>
-                      <span className="flex gap-x-1">
+                      <span className="flex w-44 gap-x-1 truncate">
                         {note.icon === "" ? <File className="w-4 h-4" /> : note.icon}
                         {note.title}
+                      </span>
+                      <span>
+                        <DeleteNote noteId={note.id}/>
                       </span>
                     </a>
                   </SidebarMenuButton>

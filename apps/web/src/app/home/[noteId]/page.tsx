@@ -25,6 +25,7 @@ export default function NotePage(props: { params: tParams}) {
 
   const onUpdate = async (content: string) => {
     if(actualNote){
+      console.log(content)
       await updateNote({
         id: actualNote.id,
         content,

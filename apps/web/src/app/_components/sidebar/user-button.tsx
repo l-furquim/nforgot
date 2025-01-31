@@ -17,28 +17,28 @@ export async function UserButton(){
             <Avatar className="w-8 h-8">
               <AvatarImage src={session.imageUrl}/>
             </Avatar>
-            <h1 className="font-semibold text-sm text-[#3C2A21]">{session.alias}</h1>
+            <h1 className="font-semibold text-sm text-[#3C2A21] dark:text-[#E5E5CB]">{session.alias}</h1>
           <ChevronDown  />
         </SidebarMenuButton>
       </DropdownMenuTrigger>
       <DropdownMenuContent className="w-[--radix-popper-anchor-width]">
-        <DropdownMenuItem className="flex-col space-y-3 w-full items-start">
+        <DropdownMenuItem className="flex-col space-y-3 w-full items-start hover:bg-inherit">
             <div className="flex items-center justify-start w-full gap-2">
               <Avatar className="w-10 h-10">
                 <AvatarImage src={session.imageUrl}/>
               </Avatar>
               <h1 className="font-semibold text-sm">{session.alias}'s nForgot</h1>
             </div>
-            <Button className="w-28 h-6 bg-[#3C2A21]">
+            <Button className="w-28 h-6 bg-[#3C2A21] dark:bg-[#E5E5CB]">
               <Settings/> 
               <DropdownMenu>
-                <DropdownMenuTrigger asChild>
+                <DropdownMenuTrigger  asChild>
                   <p className="text-xs">
                     Configurações
                   </p>
                 </DropdownMenuTrigger>
-                <DropdownMenuContent>
-                  <ModeToggle/>
+                <DropdownMenuContent className="w-full items-center text-sm gap-x-2 h-full flex justify-center">
+                  Theme <ModeToggle/>
                 </DropdownMenuContent>
               </DropdownMenu>
             </Button>
