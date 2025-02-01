@@ -4,6 +4,7 @@ import { api } from "./api";
 import { cookies } from "next/headers";
 import type { AxiosError } from "axios";
 import GitHubProvider from "next-auth/providers/github";
+import GoogleProvider from "next-auth/providers/google"
 
 
 export const authOptions: NextAuthOptions = {
@@ -11,6 +12,10 @@ export const authOptions: NextAuthOptions = {
     GitHubProvider({
           clientId: process.env.GITHUB_ID || "",
           clientSecret: process.env.GITHUB_SECRET || "",
+    }),
+    GoogleProvider({
+      clientId: process.env.GOOGLE_ID || "",
+      clientSecret: process.env.GOOGLE_SECRET || "",          
     }),
     CredentialsProvider({
       name: 'Credentials',
@@ -88,10 +93,20 @@ export const authOptions: NextAuthOptions = {
       if (user) {
         token.id = user.id;
         token.email = user.email;
-        token.password = user.password;
-        token.alias = user.alias;
-        token.accountType = user.accountType;
-        token.imageUrl = user.imageUrl;
+        
+        if(user.alias !== undefined){
+          token.password = user.password;
+          token.alias = user.alias;
+          token.accountType = user.accountType;
+          token.imageUrl = user.imageUrl;
+        }else{
+          token.alias = user.name;
+          token.accounType = "GITHUB",
+          token.imageUrl =  user.image;
+        };
+
+        console.log("Aqui o token " + token);
+        console.log("Aqui o user" + user);
       }
       return token;
     },
@@ -104,30 +119,37 @@ export const authOptions: NextAuthOptions = {
         accountType: token.accountType as string,
         imageUrl: token.imageUrl as string,
       };
+      console.log("Aqui a session " + session);
+
       return session;
     },
-    async signIn({ profile, account }){
+    async signIn({ user, profile, account }){
+
       if(!profile) return false;
+
       const accountType = account?.provider === "github" ? "GITHUB" : "GOOGLE";
+      const imageUrl = user.image; 
 
       try{
         const response = await api.post("/authors/create", JSON.stringify({
-          alias: profile.name, email: profile.email, accountType, imageUrl: profile.image, password: "nopassword",
+          alias: profile.name,
+          email: profile.email,
+          accountType, 
+          imageUrl,
+          password: "nopassword",
         }));
 
         const data = response.data;
-
-        console.log(data);
 
         if(data.token){
           const cookie = await cookies();
 
           cookie.set("nforgotAuth", data.token);
 
-          return true;
         };
       }catch(err) {
-        console.log(err);
+        const axiosError = err as AxiosError;
+        console.log(JSON.stringify(axiosError.response?.data));
         return false;
       }
       return true;
@@ -135,6 +157,3 @@ export const authOptions: NextAuthOptions = {
   }
 }
 
-function GithubProvider(arg0: { clientId: string; clientSecret: string; }): import("next-auth/providers/index").Provider {
-  throw new Error("Function not implemented.");
-}

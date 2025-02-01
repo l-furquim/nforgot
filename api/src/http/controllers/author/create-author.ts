@@ -4,10 +4,12 @@ import type { FastifyReply, FastifyRequest } from "fastify";
 import z from "zod";
 
 export async function createAuthor(request: FastifyRequest, reply: FastifyReply){{
+  console.log(request.body);
+  
   const createAuthorSchema = z.object({
     alias: z.string().min(1),
     email: z.string().email(),
-    accountType: z.enum(["GITHUB", "DEFAULT"]).default("DEFAULT"),
+    accountType: z.enum(["GITHUB", "DEFAULT", "GOOGLE"]).default("DEFAULT"),
     imageUrl: z.string().min(1),
     password: z.string().min(1),
   });
