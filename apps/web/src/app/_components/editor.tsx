@@ -10,7 +10,7 @@ import { useTheme } from "next-themes";
 import { useState } from "react";
 
 interface EditorProps {
-  onChange: (value: string) => void;
+  onChange?: (value: string) => void;
   initialContent?: string;
   editable?: boolean;
   id: string,
@@ -34,10 +34,10 @@ export default function Editor({
       editable={editable}
       editor={editor}
       theme={resolvedTheme === "dark" ? "dark" : "light"}
-      onBlur={() => {
+      onChange={() => {
         if(editor.document === blocks) return;
         setBlocks(editor.document);
-        onChange(JSON.stringify(blocks));
+        if(onChange) onChange(JSON.stringify(blocks));
       }}
     />
   );

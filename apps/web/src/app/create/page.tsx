@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button"
 import Image from "next/image"
 import { CreateForm } from "../_components/create/create-form"
+import { GithubButton } from "../_components/create/github-button"
 
 export default function CreatePage(){
   return (
@@ -13,7 +14,7 @@ export default function CreatePage(){
         <p className="text-muted-foreground text-2xl">Crie sua conta nForgot</p>
         <div className="flex flex-col space-y-3 mt-5">
           <Button>Continuar com google</Button>
-          <Button>Continuar com github</Button>
+          <GithubButton/>
         </div>
         <CreateForm/>
       </div>

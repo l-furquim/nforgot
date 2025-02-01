@@ -3,9 +3,15 @@ import CredentialsProvider from 'next-auth/providers/credentials';
 import { api } from "./api";
 import { cookies } from "next/headers";
 import type { AxiosError } from "axios";
+import GitHubProvider from "next-auth/providers/github";
+
 
 export const authOptions: NextAuthOptions = {
   providers: [
+    GitHubProvider({
+          clientId: process.env.GITHUB_ID || "",
+          clientSecret: process.env.GITHUB_SECRET || "",
+    }),
     CredentialsProvider({
       name: 'Credentials',
       credentials: {
@@ -100,5 +106,35 @@ export const authOptions: NextAuthOptions = {
       };
       return session;
     },
+    async signIn({ profile, account }){
+      if(!profile) return false;
+      const accountType = account?.provider === "github" ? "GITHUB" : "GOOGLE";
+
+      try{
+        const response = await api.post("/authors/create", JSON.stringify({
+          alias: profile.name, email: profile.email, accountType, imageUrl: profile.image, password: "nopassword",
+        }));
+
+        const data = response.data;
+
+        console.log(data);
+
+        if(data.token){
+          const cookie = await cookies();
+
+          cookie.set("nforgotAuth", data.token);
+
+          return true;
+        };
+      }catch(err) {
+        console.log(err);
+        return false;
+      }
+      return true;
+    },
   }
+}
+
+function GithubProvider(arg0: { clientId: string; clientSecret: string; }): import("next-auth/providers/index").Provider {
+  throw new Error("Function not implemented.");
 }
