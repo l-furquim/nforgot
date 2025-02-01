@@ -78,7 +78,8 @@ export const NotesContainer: React.FC<NotesContainerProps> = ({ fetchNotes }) =>
                 <SidebarMenuItem key={note.id}>
                   <SidebarMenuButton
                     asChild
-                    className={`${note.id === currentId &&  "bg-[#3C2A21]"}`}
+                    className={`${note.id === currentId &&  
+                    "bg-[#3C2A21] text-[#E5E5CB] hover:bg-[#563c2f] hover:text-[#E5E5CB]"}`}
                   >
                     <a href={`/home/${note.id}`}>
                       <span className="flex w-44 gap-x-1 truncate">
@@ -109,7 +110,8 @@ export const NotesContainer: React.FC<NotesContainerProps> = ({ fetchNotes }) =>
                 <SidebarMenuItem key={note.id} className="group">
                   <SidebarMenuButton
                     asChild
-                    className={`${note.id === currentId &&  "bg-[#3C2A21]"}`}
+                    className={`${note.id === currentId &&  
+                      "bg-[#3C2A21] text-[#E5E5CB] hover:bg-[#563c2f] hover:text-[#E5E5CB]"}`}
                   >
                     <a href={`/home/${note.id}`}>
                       <span className="flex w-44 gap-x-1 truncate">
