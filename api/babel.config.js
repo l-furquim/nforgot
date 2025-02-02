@@ -1,4 +1,4 @@
-module.exports = {
+export default {
   presets: ['@babel/preset-env', '@babel/preset-typescript'],
   plugins: [
     [
@@ -6,7 +6,7 @@ module.exports = {
       {
         root: ['./src'],
         alias: {
-          '@': './dist', // Define o alias '@' para a pasta 'src'
+          '@': './dist', // Seu alias '@'
         },
       },
     ],
