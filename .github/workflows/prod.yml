@@ -21,6 +21,9 @@ jobs:
         with:
           node-version: '18'
 
+      - name: Navigate to api folder
+        run: cd api
+
       - name: Install dependencies
         run: |
           npm install
@@ -33,7 +36,7 @@ jobs:
         run: sudo docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
 
       - name: Build docker image
-        run: sudo docker build -t furqas/nforgot-api .
+        run: sudo docker build -t furqas/nforgot-api -f api/Dockerfile .
 
       - name: Push image docker
         run: sudo docker push furqas/nforgot-api
@@ -52,8 +55,6 @@ jobs:
         run: |
           sudo docker run -d \
             -p 3333:3333 \
-            -e DATABASE_USERNAME=${{ secrets.DATABASE_USERNAME }} \
-            -e DATABASE_PASSWORD='${{ secrets.DATABASE_PASSWORD }}' \
             -e DATABASE_URL=${{ secrets.DATABASE_URL }} \
             --name nforgot-api \
             furqas/nforgot-api
