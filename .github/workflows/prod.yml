@@ -1,17 +1,6 @@
-name: Deploy nforgot-api
-
-on:
-  push:
-    branches: ["main"]
-
 jobs:
   build:
     runs-on: ubuntu-latest
-    env:
-      DATABASE_URL: ${{ secrets.DATABASE_URL }}
-      NODE_ENV: ${{ secrets.NODE_ENV }}
-      JWT_SECRET: ${{ secrets.JWT_SECRET }}
-      
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
@@ -30,8 +19,6 @@ jobs:
       - name: Build project with TypeScript
         run: |
           cd api
-          ls
-          cat package.json
           npm run build
 
       - name: Login Docker Hub
@@ -58,5 +45,7 @@ jobs:
           sudo docker run -d \
             -p 3333:3333 \
             -e DATABASE_URL=${{ secrets.DATABASE_URL }} \
+            -e NODE_ENV=${{ secrets.NODE_ENV }} \
+            -e JWT_SECRET=${{ secrets.JWT_SECRET }} \
             --name nforgot-api \
             furqas/nforgot-api

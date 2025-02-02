@@ -4,10 +4,7 @@ FROM node:18 AS builder
 WORKDIR /app
 
 # Copiar arquivos essenciais (note que agora o tsconfig.json é copiado)
-COPY package*.json ./
-COPY tsconfig.json ./
-COPY prisma ./prisma
-COPY src ./src
+COPY . .
 
 # Instalar dependências e construir o projeto
 RUN npm install
@@ -22,13 +19,15 @@ WORKDIR /app
 COPY --from=builder /app/dist ./dist
 COPY --from=builder /app/prisma ./prisma
 
-RUN ls -la /app/dist
-RUN ls -la /app/
+# Copiar .env gerado no CI/CD
+COPY .env .
 
-# Copiar novamente o package.json para instalar somente as dependências de produção
+# Copiar package.json e package-lock.json para instalar dependências de produção
 COPY package*.json ./
 RUN npm install --production
 
+# Expor a porta da aplicação
 EXPOSE 3333
 
+# Comando para rodar a aplicação
 CMD ["node", "dist/server.js"]
