@@ -1,8 +1,9 @@
-import { Button } from "@/components/ui/button";
 import { getSession } from "@/lib/session";
 import { getTimeOfDay } from "@/lib/utils";
-import { Box, PlusCircle } from "lucide-react";
+import { Box } from "lucide-react";
 import { CreateNote } from "../_components/home/create-note";
+
+export const dynamic = 'force-dynamic';
 
 export default async function HomePage(){
   const author = await getSession();

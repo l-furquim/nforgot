@@ -22,7 +22,7 @@ export default function NotePage(props: { params: tParams}) {
     }
 
     fetchNote();
-  }, []);
+  }, [props.params]);
 
   const onUpdate = async (content: string) => {
     if(actualNote){

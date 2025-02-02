@@ -2,7 +2,7 @@
 
 import { api } from "@/lib/api";
 import { AxiosError } from "axios";
-import { cookies, headers } from "next/headers"
+import { cookies } from "next/headers"
 import { redirect } from "next/navigation";
 
 export type Note = {

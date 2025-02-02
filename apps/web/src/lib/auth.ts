@@ -26,7 +26,7 @@ export const authOptions: NextAuthOptions = {
         accountType: { label: "AccountType", type: "accountType", optional: true, },
         imageUrl: { label: "ImageUrl", type: "imageUrl", optional: true, },
       },
-      async authorize(credentials, req) {
+      async authorize(credentials) {
         const { email, password, alias, accountType, imageUrl } = credentials as {
           email: string;
           password: string;
@@ -101,7 +101,7 @@ export const authOptions: NextAuthOptions = {
           token.imageUrl = user.imageUrl;
         }else{
           token.alias = user.name;
-          token.accounType = "GITHUB",
+          token.accounType = "GITHUB";
           token.imageUrl =  user.image;
         };
 
