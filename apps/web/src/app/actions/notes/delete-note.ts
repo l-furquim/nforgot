@@ -11,7 +11,7 @@ export async function deleteNote(noteId: string){
     const token = cookie.get("nforgotAuth")?.value;
 
     if(token){
-      await fetch(`http://localhost:3333/notes/delete?id=${noteId}`, {
+      await fetch(`http://ec2-18-191-17-84.us-east-2.compute.amazonaws.com:3333/notes/delete?id=${noteId}`, {
         method: "DELETE",
         headers: {
           "Authorization": `Bearer ${token}`,
