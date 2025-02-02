@@ -1,0 +1,59 @@
+name: Deploy nforgot-api
+
+on:
+  push:
+    branches: ["main"]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    env:
+      DATABASE_URL: ${{ secrets.DATABASE_URL }}
+      NODE_ENV: ${{ secrets.NODE_ENV }}
+      JWT_SECRET: ${{ secrets.JWT_SECRET }}
+      
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+
+      - name: Install dependencies
+        run: |
+          npm install
+          npm install -g typescript
+
+      - name: Build project with TypeScript
+        run: npm run build
+
+      - name: Login Docker Hub
+        run: sudo docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
+
+      - name: Build docker image
+        run: sudo docker build -t furqas/nforgot-api .
+
+      - name: Push image docker
+        run: sudo docker push furqas/nforgot-api
+
+  deploy:
+    needs: build
+    runs-on: self-hosted
+    steps:
+      - name: Pull image from docker hub
+        run: sudo docker pull furqas/nforgot-api:latest
+
+      - name: Remove docker container
+        run: sudo docker rm -f nforgot-api
+
+      - name: Run docker container
+        run: |
+          sudo docker run -d \
+            -p 3333:3333 \
+            -e DATABASE_USERNAME=${{ secrets.DATABASE_USERNAME }} \
+            -e DATABASE_PASSWORD='${{ secrets.DATABASE_PASSWORD }}' \
+            -e DATABASE_URL=${{ secrets.DATABASE_URL }} \
+            --name nforgot-api \
+            furqas/nforgot-api
