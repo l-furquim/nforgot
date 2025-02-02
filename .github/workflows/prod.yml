@@ -15,6 +15,8 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
+        with:
+          path: nforgot
 
       - name: Setup Node.js
         uses: actions/setup-node@v3
@@ -25,23 +27,23 @@ jobs:
         run: |
           npm install
           npm install -g typescript
-        working-directory: api
+        working-directory: nforgot/api
 
       - name: Build project with TypeScript
         run: npm run build
-        working-directory: api
+        working-directory: nforgot/api
 
       - name: Login Docker Hub
-        run: sudo docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
-        working-directory: api
+        run: docker login --username ${{ secrets.DOCKER_USERNAME }} --password ${{ secrets.DOCKER_PASSWORD }}
+        working-directory: nforgot/api
 
       - name: Build docker image
-        run: sudo docker build -t furqas/nforgot-api -f ./Dockerfile .
-        working-directory: api
+        run: docker build -t furqas/nforgot-api -f ./Dockerfile .
+        working-directory: nforgot/api
 
       - name: Push image docker
-        run: sudo docker push furqas/nforgot-api
-        working-directory: api
+        run: docker push furqas/nforgot-api
+        working-directory: nforgot/api
 
   deploy:
     needs: build
@@ -50,8 +52,8 @@ jobs:
       - name: Pull image from docker hub
         run: sudo docker pull furqas/nforgot-api:latest
 
-      - name: Remove docker container
-        run: sudo docker rm -f nforgot-api
+      - name: Remove docker container (if exists)
+        run: sudo docker rm -f nforgot-api || true
 
       - name: Run docker container
         run: |
