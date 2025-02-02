@@ -3,11 +3,9 @@ FROM node:18 AS builder
 
 WORKDIR /app
 
-RUN ls
-RUN pwd
-
-# Copiar os arquivos de configuração e os diretórios src e prisma (relativos à pasta "api")
+# Copiar arquivos essenciais (note que agora o tsconfig.json é copiado)
 COPY package*.json ./
+COPY tsconfig.json ./
 COPY prisma ./prisma
 COPY src ./src
 
@@ -24,7 +22,7 @@ WORKDIR /app
 COPY --from=builder /app/dist ./dist
 COPY --from=builder /app/prisma ./prisma
 
-# Instalar dependências de produção
+# Copiar novamente o package.json para instalar somente as dependências de produção
 COPY package*.json ./
 RUN npm install --production
 
