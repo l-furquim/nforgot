@@ -29,7 +29,9 @@ jobs:
 
       - name: Build project with TypeScript
         run: |
-          pwd
+          cd api
+          ls
+          cat package.json
           npm run build
 
       - name: Login Docker Hub
