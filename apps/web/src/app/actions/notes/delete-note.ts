@@ -1,6 +1,5 @@
 "use server"
 
-import { api } from "@/lib/api";
 import type { AxiosError } from "axios";
 import { cookies } from "next/headers"
 

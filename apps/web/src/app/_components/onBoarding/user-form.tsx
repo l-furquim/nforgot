@@ -13,14 +13,6 @@ export const UserForm = () => {
   const [errorMessage, setErrorMessage] = useState(<></>);
   const router = useRouter();
 
-
-  let icons = [];
-
-  
-  for(let i=0; i <= 9; i++){
-    icons.push(`/icons/icon-${i}.png`);
-  };
-
   async function handleSubmit(e: FormEvent<HTMLFormElement>){
     e.preventDefault();
     

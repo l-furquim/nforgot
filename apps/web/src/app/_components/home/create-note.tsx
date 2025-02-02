@@ -16,9 +16,8 @@ export const CreateNote = () => {
         icon: "",
         type: "PRIVATE",
       };
-  
-      await createNote(newNote);
-      location.replace("/home/" + newId);
+        await createNote(newNote);
+        location.replace("/home/" + newId);
     }
 
   return (

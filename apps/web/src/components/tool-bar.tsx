@@ -3,7 +3,7 @@
 import { Smile, X } from "lucide-react"
 import { IconPicker } from "./icon-picker"
 import { Button } from "./ui/button"
-import React, { ElementRef, useRef, useState } from "react"
+import React, { useRef, useState } from "react"
 import TextareaAutosize from "react-textarea-autosize";
 import { updateNote } from "@/app/actions/notes/update-note"
 
