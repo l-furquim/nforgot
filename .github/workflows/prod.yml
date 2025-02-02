@@ -38,7 +38,7 @@ jobs:
         run: docker login --username ${{ secrets.DOCKER_USERNAME }} --password ${{ secrets.DOCKER_PASSWORD }}
 
       - name: Build docker image
-        run: docker build -t furqas/nforgot-api -f .api/Dockerfile .
+        run: docker build -t furqas/nforgot-api -f api/Dockerfile .
 
       - name: Push image docker
         run: docker push furqas/nforgot-api
