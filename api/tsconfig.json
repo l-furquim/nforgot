@@ -3,25 +3,23 @@
   "_version": "20.1.0",
 
   "compilerOptions": {
-    "lib": ["es2023"],
-    "module": "Node16",
-    "target": "ES2020",
-    "outDir": "./dist", // Adicione esta linha
-    "strict": true,
-    "esModuleInterop": true,
-    "allowSyntheticDefaultImports": true,
-    "skipLibCheck": true,
-    "moduleResolution": "node16",
-    "baseUrl": "./",
-    "typeRoots": ["./node_modules/@types"],
-    "paths": {
-      "@/*": ["./src/*"]
-    }
-  },
-  "include": [
-    "src/**/*.ts",        
-    "prisma/**/*.ts"   
-  ],
+      "module": "CommonJS",
+      "moduleResolution": "node",
+      "outDir": "./dist",
+      "strict": true,
+      "esModuleInterop": true,
+      "allowSyntheticDefaultImports": true,
+      "skipLibCheck": true,
+      "baseUrl": "./",
+      "typeRoots": ["./node_modules/@types", "./src/types"],
+      "paths": {
+        "@/*": ["./src/*"]
+      }
+    },
+    "include": [
+      "src/**/*.ts",        
+      "prisma/**/*.ts"   
+    ],
   "exclude": [
     "node_modules"      
   ]
