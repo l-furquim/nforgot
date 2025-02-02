@@ -21,25 +21,27 @@ jobs:
         with:
           node-version: '18'
 
-      - name: Navigate to api folder
-        run: cd api
-
       - name: Install dependencies
         run: |
           npm install
           npm install -g typescript
+        working-directory: api
 
       - name: Build project with TypeScript
         run: npm run build
+        working-directory: api
 
       - name: Login Docker Hub
         run: sudo docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
+        working-directory: api
 
       - name: Build docker image
-        run: sudo docker build -t furqas/nforgot-api -f api/Dockerfile .
+        run: sudo docker build -t furqas/nforgot-api -f ./Dockerfile .
+        working-directory: api
 
       - name: Push image docker
         run: sudo docker push furqas/nforgot-api
+        working-directory: api
 
   deploy:
     needs: build
