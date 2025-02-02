@@ -1,5 +1,5 @@
 import type { AuthorsRepository } from "@/repositories/author-repository";
-import { compare } from "bcryptjs";
+import bcrypt from "bcryptjs";
 import { InvalidCredentialsError } from "../errors/invalid-credentials-error";
 
 interface AuthAuthorRequest {
@@ -20,7 +20,7 @@ export class AuthAuthorUseCase{
       throw new InvalidCredentialsError();
     }
 
-    const validAuth = compare(password, author.password);
+    const validAuth = bcrypt.compare(password, author.password);
 
     if(!validAuth){
       throw new InvalidCredentialsError();    

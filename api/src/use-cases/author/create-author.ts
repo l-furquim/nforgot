@@ -1,5 +1,5 @@
 import type { AuthorsRepository } from "@/repositories/author-repository";
-import { compare, hash } from "bcryptjs";
+import bcrypt from "bcryptjs";
 import { AuthorAlredyExistError } from "../errors/author-alredy-exists-error";
 
 interface CreateAuthorUseCaseRequest {
@@ -19,7 +19,7 @@ export class CreateAuthorUseCase{
     const userAlredyExists =  await this.repository.findByEmail(email);
 
     if(userAlredyExists){
-      const isPaswordCorrect = await compare(password, userAlredyExists.password);
+      const isPaswordCorrect = await bcrypt.compare(password, userAlredyExists.password);
 
       if(isPaswordCorrect){
         return userAlredyExists;
@@ -27,8 +27,8 @@ export class CreateAuthorUseCase{
         throw new AuthorAlredyExistError();
       }
     };
-  
-    const hashedPassword = await hash(password, 6);
+    
+    const hashedPassword = await bcrypt.hash(password, 6);
   
     const author = await this.repository.create({
       email,
