@@ -32,7 +32,7 @@ export const NotesContainer: React.FC<NotesContainerProps> = ({ fetchNotes }) =>
     const newNote: Note = {
       content: "",
       id: newId,
-      title: "New note",
+      title: "Nova nota",
       icon: "",
       type: "PUBLIC",
     };
@@ -46,7 +46,7 @@ export const NotesContainer: React.FC<NotesContainerProps> = ({ fetchNotes }) =>
     const newNote: Note = {
       content: "",
       id: newId,
-      title: "New note",
+      title: "Nova nota",
       icon: "",
       type: "PRIVATE",
     };
