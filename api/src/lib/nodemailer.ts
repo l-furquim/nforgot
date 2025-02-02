@@ -1,4 +1,4 @@
-import * as nodemailer from "nodemailer";
+import nodemailer from "nodemailer";
 import path from "path";
 import * as fs from "fs";
 
