@@ -14,9 +14,7 @@ export default function CreatePage(){
         <p className="text-muted-foreground text-2xl">Crie sua conta nForgot</p>
         <div className="flex flex-col space-y-3 mt-5">
           <GoogleButton/>
-          <GithubButton/>
         </div>
-        <CreateForm/>
       </div>
     </div>
   )

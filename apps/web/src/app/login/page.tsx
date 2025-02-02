@@ -12,10 +12,8 @@ export default function LoginPage(){
         <h1 className="font-bold text-2xl">Pense. E faça.</h1>
         <p className="text-muted-foreground text-2xl">Faça login com a sua conta nForgot</p>
         <div className="flex flex-col space-y-3 mt-5">
-          <Button>Login com google</Button>
           <Button>Login com github</Button>
         </div>
-        <LoginForm/>
       </div>
     </div>
   )

@@ -54,7 +54,7 @@ export const PublishNote = ({ published, noteId }:PublishNoteProps) => {
       title: "Copiado para seu clipboard",
       description: "URL copiada",
     })
-    navigator.clipboard.writeText(`http://localhost:3000/visit/${noteId}`)
+    navigator.clipboard.writeText(`https://nforgot.vercel.app/visit/${noteId}`)
   }
 
   return (
@@ -81,7 +81,7 @@ export const PublishNote = ({ published, noteId }:PublishNoteProps) => {
                   <div className="w-full flex flex-col items-center gap-y-5">
                     <div className="flex gap-x-2">
                         <input
-                        value={`http://localhost:3000/visit/${noteId }`}
+                        value={`https://nforgot.vercel.app/visit/${noteId }`}
                         type="text" 
                         disabled 
                         className="bg-transparent w-56 hover:bg-transparent text-[#3C2A21] dark:text-[#E5E5CB]" />
