@@ -33,7 +33,7 @@ export async function createAuthor(request: FastifyRequest, reply: FastifyReply)
   
     return reply.status(201).send({
       author, token,
-    })
+    });
   }catch(err){
     if(err instanceof AuthorAlredyExistError){
       reply.status(400).send({

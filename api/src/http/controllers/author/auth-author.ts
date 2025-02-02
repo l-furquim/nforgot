@@ -24,11 +24,9 @@ export async function authAuthor(request: FastifyRequest, reply: FastifyReply){
       sub: author.id,
     });
 
-    
-
     return reply.status(200).send({
       token, author,
-    })
+    });
   }catch(err){
     if(err instanceof InvalidCredentialsError){
       return reply.status(400).send({

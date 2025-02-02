@@ -1,4 +1,4 @@
-import '@fastify/jwt'
+import '@fastify/jwt';
 
 export interface AccessTokenPayload {
   sub: string;

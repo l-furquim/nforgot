@@ -2,7 +2,7 @@ import { PrismaReactionRepository } from "@/repositories/prisma-reaction-reposit
 import { UpdateReactionUseCase } from "@/use-cases/reaction/update-reaction-use-case";
 
 export function makeUpdateReactionUseCase(){
-  const repo = new PrismaReactionRepository()
+  const repo = new PrismaReactionRepository();
   
   return new UpdateReactionUseCase(repo);
 }

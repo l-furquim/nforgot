@@ -37,6 +37,6 @@ export async function validateCode(request: FastifyRequest, reply: FastifyReply)
     }
     reply.status(500).send({
       err,
-    })
+    });
   }
 }
