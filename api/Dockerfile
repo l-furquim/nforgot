@@ -23,6 +23,7 @@ COPY --from=builder /app/dist ./dist
 COPY --from=builder /app/prisma ./prisma
 
 RUN ls -la /app/dist
+RUN ls -la /app/
 
 # Copiar novamente o package.json para instalar somente as dependências de produção
 COPY package*.json ./
