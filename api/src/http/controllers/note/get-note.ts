@@ -32,7 +32,7 @@ export async function getNote(request: FastifyRequest, reply: FastifyReply){
     if(err instanceof UnauthorizedNoteError){
       return reply.status(401).send({
         message: err.message
-      })
+      });
     }
   }
 }

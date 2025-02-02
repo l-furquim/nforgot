@@ -47,6 +47,6 @@ export async function sendAuthorCode(request: FastifyRequest, reply: FastifyRepl
 
     return reply.status(500).send({
       err,
-    })
+    });
   }
 }

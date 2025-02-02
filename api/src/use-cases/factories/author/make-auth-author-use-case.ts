@@ -1,4 +1,4 @@
-import { PrismaAuthorRepository } from "@/repositories/prisma-author-repository"
+import { PrismaAuthorRepository } from "@/repositories/prisma-author-repository";
 import { AuthAuthorUseCase } from "@/use-cases/author/auth-author";
 
 

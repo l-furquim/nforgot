@@ -59,12 +59,12 @@ export class PrismaNoteRepository implements NoteRepository{
       }
       
     });
-    console.log(notes)
+    console.log(notes);
     const note = await prisma.note.findMany({
         where: {
           author_id: authorId
         },
-      })
+      });
 
     return note;
   }
