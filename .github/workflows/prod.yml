@@ -28,7 +28,9 @@ jobs:
           npm install -g typescript
 
       - name: Build project with TypeScript
-        run: npm run build
+        run: |
+        cd api
+        npm run build
 
       - name: Login Docker Hub
         run: docker login --username ${{ secrets.DOCKER_USERNAME }} --password ${{ secrets.DOCKER_PASSWORD }}
