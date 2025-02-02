@@ -1,5 +1,5 @@
 import { getSession } from "@/lib/session";
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
+import { DropdownMenu, DropdownMenuContent, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
 import { SidebarMenuButton } from "@/components/ui/sidebar";
 import { ChevronDown, DoorOpen, Settings } from "lucide-react";
 import { Avatar, AvatarImage } from "@/components/ui/avatar";
@@ -27,7 +27,7 @@ export async function UserButton(){
               <Avatar className="w-10 h-10">
                 <AvatarImage src={session.imageUrl}/>
               </Avatar>
-              <h1 className="font-semibold text-sm">{nameSplited}'s nForgot</h1>
+              <h1 className="font-semibold text-sm">{nameSplited}&apos nForgot</h1>
         </div>  
         <div className="space-y-3 mt-5 w-full ml-5">
           <Button className="w-28 h-10 bg-[#3C2A21] dark:bg-[#E5E5CB]">
