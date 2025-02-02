@@ -9,6 +9,7 @@
     "outDir": "./dist", // Adicione esta linha
     "strict": true,
     "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
     "skipLibCheck": true,
     "moduleResolution": "node16",
     "baseUrl": "./",
