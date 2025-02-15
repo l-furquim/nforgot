@@ -5,7 +5,7 @@ export default function DocumentationLayout({
   children
 }: { children: React.ReactNode }){
   return (
-    <div className="w-full h-screen flex">
+    <div className="w-full h-dvh flex">
       <SideDocs/>
       {children}
     </div>

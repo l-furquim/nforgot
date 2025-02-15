@@ -8,7 +8,7 @@ interface GuideContainerProps {
 
 export const GuideContainer = ({ text, href, isSelected }: GuideContainerProps) => {
   return (
-    <Link className={`${isSelected && "font-bold"}`} href={href}>
+    <Link className={`${isSelected && "text-muted-foreground"}`} href={href}>
       { text }
     </Link>
   )

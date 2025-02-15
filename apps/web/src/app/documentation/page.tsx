@@ -2,10 +2,11 @@
 
 import { BookMarked } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { Footer } from "../_components/footer";
 
 export default function DocumentationPage(){
   return (
-    <div className="flex h-full">
+    <div className="flex flex-col h-full">
       <div className="flex pl-5 justify-center space-x-20 pt-32 w-full"> 
         <div className="flex-col flex  space-y-5">
           <h1 className="font-bold text-4xl">Documentações</h1>
@@ -24,6 +25,7 @@ export default function DocumentationPage(){
           size={200}
           />
       </div>
+      <Footer/>
     </div>
   )
 }

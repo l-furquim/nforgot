@@ -1,9 +1,11 @@
+import { Footer } from "@/app/_components/footer";
 import { Separator } from "@/components/ui/separator";
 import Image from "next/image";
 
 export default function StartingPage(){
   return (
-    <div className="flex w-full items-start ml-20 pt-24 h-[500vh] flex-col">
+    <div className="flex w-full items-start pt-24 flex-col">
+      <div className="ml-20 pr-4">
       <h1 className="font-bold text-2xl">Começando com o nforgot</h1>
       <p className="w-[80%] pt-20">
         Se você não sabe por onde começar com o nforgot, este guia é para você. Iremos aprender a criar uma nota, 
@@ -83,6 +85,23 @@ export default function StartingPage(){
       width={900}
       height={200}
       />
+
+      <p className="mt-10">
+        Após a publicação terminar, você pode copiar o link gerado para sua nota e enviar para todos que deseja <br />
+        Note que, mesmo a nota sendo pública para visualização, ninguém é capaz de edita-la
+      </p>
+
+      <h2 className="pt-20 font-bold text-xl mb-2">
+              Parabéns
+      </h2>
+
+      <Separator orientation="horizontal" className="w-[80%]" />
+      <p className="mt-10 pb-10">
+        Obrigado por ler até aqui, acabamos o primeiro guia do nforgot de como começar com o pé direito, agora você é capaz de utilizar desta ferramenta e comunidade incriveis. <br /> <br />
+        Qualquer duvida ou report, por favor envie para mim via email: <span className="text-muted-foreground"> furquimmsw@gmail.com </span>
+      </p>
+      </div>
+      <Footer/>
     </div>
   )
 }

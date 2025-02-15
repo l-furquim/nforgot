@@ -1,4 +1,4 @@
-import { Instagram, Linkedin, Twitter } from "lucide-react"
+import { Github, Instagram, Linkedin, Twitter } from "lucide-react"
 import { Icon } from "./icon"
 import Link from "next/link"
 
@@ -8,7 +8,7 @@ export const Footer = () => {
       <div className="flex flex-col space-y-10 ml-10 items-start w-full">
         <Icon/>
         <div className="w-full flex space-x-5">
-          <Instagram/> <Twitter/> <Linkedin/>
+          <Instagram/> <Twitter/> <Linkedin/> <Link href={"https://github.com/l-furquim/nforgot"}> <Github/> </Link>
         </div>
         <p className="text-muted-foreground">Nós não vendemos ou negociamos <br/> quaisquer informações de usuários</p>
       </div>
