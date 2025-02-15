@@ -1,5 +1,6 @@
 import { Instagram, Linkedin, Twitter } from "lucide-react"
 import { Icon } from "./icon"
+import Link from "next/link"
 
 export const Footer = () => {
   return (
@@ -14,7 +15,7 @@ export const Footer = () => {
       <div className="flex w-full ml-10 mt-10 space-x-20">
         <div className="w-full space-y-2 text-muted-foreground h-full flex flex-col justify-center">
           <h1 className="text-[#3C2A21] font-bold text-xl">Recursos</h1>
-          <p>Documentação</p>
+          <Link className="hover:cursor-pointer" href={"/documentation"}>Documentação</Link>
           <p>Ajuda</p>
         </div>
         <div className="w-full space-y-2 text-muted-foreground h-full flex flex-col justify-center">
