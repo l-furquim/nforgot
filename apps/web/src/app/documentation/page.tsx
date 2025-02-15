@@ -3,10 +3,13 @@
 import { BookMarked } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Footer } from "../_components/footer";
+import { SideDocs } from "../_components/documentation/side-docs";
+import { PublicNav } from "../_components/public-pages/public-nav";
 
 export default function DocumentationPage(){
   return (
     <div className="flex flex-col h-full">
+      <PublicNav/>
       <div className="flex pl-5 justify-center space-x-20 pt-32 w-full"> 
         <div className="flex-col flex  space-y-5">
           <h1 className="font-bold text-4xl">Documentações</h1>

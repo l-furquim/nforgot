@@ -4,11 +4,19 @@ import Link from "next/link"
 
 export const Footer = () => {
   return (
-    <footer className="flex py-8 mt-10  flex-col">
+    <footer className="flex py-8 mt-10 items-center">
       <div className="flex flex-col space-y-10 ml-10 items-start w-full">
         <Icon/>
         <div className="w-full flex space-x-5">
-          <Instagram/> <Twitter/> <Linkedin/> <Link href={"https://github.com/l-furquim/nforgot"}> <Github/> </Link>
+          <Link href={"https://x.com/furqass"}>
+            <Twitter/>
+          </Link>
+          <Link href={"https://www.linkedin.com/in/lucas-hernandes-furquim-45048b312/"}>
+            <Linkedin/> 
+          </Link>
+          <Link href={"https://github.com/l-furquim/nforgot"}>
+            <Github/>
+          </Link>
         </div>
         <p className="text-muted-foreground">Nós não vendemos ou negociamos <br/> quaisquer informações de usuários</p>
       </div>
@@ -16,12 +24,13 @@ export const Footer = () => {
         <div className="w-full space-y-2 text-muted-foreground h-full flex flex-col justify-center">
           <h1 className="text-[#3C2A21] font-bold text-xl">Recursos</h1>
           <Link className="hover:cursor-pointer" href={"/documentation"}>Documentação</Link>
-          <p>Ajuda</p>
+          <Link href={"/releases"} className="hover:cursor-pointer">Releases</Link>
+          {/* <p>Ajuda</p> */}
         </div>
         <div className="w-full space-y-2 text-muted-foreground h-full flex flex-col justify-center">
-          <h1 className="text-[#3C2A21] font-bold text-xl">Companhia</h1>
-          <p>Sobre nós</p>
-          <p>Segurança</p>
+          {/* <h1 className="text-[#3C2A21] font-bold text-xl">Companhia</h1> */}
+         {/*  <p>Sobre nós</p>
+          <p>Segurança</p> */}
         </div>
       </div>
     </footer>

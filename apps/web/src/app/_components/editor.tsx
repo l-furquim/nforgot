@@ -29,16 +29,18 @@ export default function Editor({
   const { resolvedTheme } = useTheme();
 
   return (
-    <BlockNoteView
-      className="dark:bg-[#1A120B] bg-[#E5E5CB]"
-      editable={editable}
-      editor={editor}
-      theme={resolvedTheme === "dark" ? "dark" : "light"}
-      onChange={() => {
-        if(editor.document === blocks) return;
-        setBlocks(editor.document);
-        if(onChange) onChange(JSON.stringify(blocks));
-      }}
-    />
+    <div className={`${resolvedTheme === "dark" ? "bg-[#1A120B]" : "bg-[#E5E5CB]"}`}>
+      <BlockNoteView
+        editable={editable}
+        editor={editor}
+        theme={resolvedTheme === "dark" ? "dark" : "light"}
+        className="w-full h-full"
+        onChange={() => {
+          if (editor.document === blocks) return;
+          setBlocks(editor.document);
+          if (onChange) onChange(JSON.stringify(blocks));
+        }}
+      />
+    </div>
   );
 }

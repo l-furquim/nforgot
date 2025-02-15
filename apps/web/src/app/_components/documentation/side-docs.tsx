@@ -1,21 +1,36 @@
 "use client"
 import { usePathname } from "next/navigation"
 import { GuideContainer } from "./guide-container";
-import Image from "next/image";
+import {
+  Sidebar,
+  SidebarContent,
+  SidebarGroup,
+  SidebarGroupContent,
+  SidebarGroupLabel,
+  SidebarMenu,
+  SidebarMenuButton,
+  SidebarMenuItem,
+} from "@/components/ui/sidebar"
 
 export const SideDocs = () => {
   const actualPath = usePathname();
 
   return (
-    <div className="w-56 h-full  bg-sidebar">
-      <div className="w-full h-full flex flex-col items-center">
-        <h1 className="text-lg pt-10 flex items-center gap-2">
-        <Image src={"/icon.png"} alt="nforgot icon" width={50} height={50} />  Guias
-        </h1>
-        <div className="pt-10">
-          <GuideContainer text="Começando" href="/documentation/starting" isSelected={actualPath === "/documentation/starting"} />
-        </div>
-      </div>
-    </div>
+    <Sidebar side="left">
+    <SidebarContent>
+      <SidebarGroup>
+        <SidebarGroupLabel className="font-bold self-center text-1xl text-[#3C2A21]">
+            Guias
+        </SidebarGroupLabel>
+        <SidebarGroupContent className="mt-2 flex flex-col w-full items-center">
+          <SidebarMenu className="flex flex-col w-full items-center mt-4">
+              <SidebarMenuItem>
+                <GuideContainer text="Começando com o nforgot" href="/documentation/starting" isSelected={actualPath === "/documentation/starting"} />
+              </SidebarMenuItem>
+          </SidebarMenu>
+        </SidebarGroupContent>
+      </SidebarGroup>
+    </SidebarContent>
+  </Sidebar>
   )
 }
